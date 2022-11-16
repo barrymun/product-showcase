@@ -20,6 +20,7 @@ body {
   height: 100vh;
   margin: 0;
   /*background-color: #242424;*/
+  min-height: 200vh;
 }
 
 .container {
@@ -27,9 +28,15 @@ body {
   color: #242424;
 }
 
-#product-info {}
+#product-info {
+  position: relative;
+  z-index: 2;
+}
 
 #product-display {
-  min-width: 50rem;
-  min-height: 50rem;
+  position: fixed;
+  z-index: 1;
+  /*width: calc(100% - 5rem);*/
+  /*min-width: 50rem;*/
+  /*min-height: 50rem;*/
 }
