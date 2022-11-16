@@ -40,7 +40,6 @@ renderer.setSize(cameraWidth, cameraHeight);
 
 // bind the renderer to the DOM
 parentElement.appendChild(renderer.domElement);
-// document.body.appendChild(renderer.domElement);
 
 // const ambientLight = new THREE.AmbientLight( 0x404040 );  // soft white light
 const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x222222);  // more shadows
