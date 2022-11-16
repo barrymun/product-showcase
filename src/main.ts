@@ -4,7 +4,6 @@ import * as THREE from 'three';
  * handle page resize events
  */
 window.addEventListener('resize', () => {
-  return; // TODO:
   cameraWidth = parentElement.offsetWidth;
   cameraHeight = parentElement.offsetHeight;
   // cameraWidth = parentElement.getBoundingClientRect().width;
@@ -13,14 +12,8 @@ window.addEventListener('resize', () => {
   // cameraHeight = parentElement.clientHeight;
   cameraAspect = cameraWidth / cameraHeight;
   camera.aspect = cameraAspect;
-
   camera.updateProjectionMatrix();
   renderer.setSize(cameraWidth, cameraHeight);
-  // renderer.render(scene, camera);
-
-  // camera.aspect = window.innerWidth / window.innerHeight;
-  // camera.updateProjectionMatrix();
-  // renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 const parentElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
