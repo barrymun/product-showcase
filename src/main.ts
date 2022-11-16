@@ -84,8 +84,9 @@ function animate() {
   requestAnimationFrame(animate);
 
   // const currentTimeLine: number = (window.scrollY / documentHeight) * 12.5;  // full
-  const currentTimeLine: number = (window.scrollY / documentHeight) * 6.25;  // half
-  shape.rotation.set(0, currentTimeLine, 0);
+  // const currentTimeLine: number = (window.scrollY / documentHeight) * 6.25;  // half
+  const currentTimeLine: number = window.scrollY / documentHeight;
+  shape.rotation.set(0, currentTimeLine * Math.PI * 2, 0);
 
   renderer.render(scene, camera);
 }
