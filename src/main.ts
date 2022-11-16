@@ -17,10 +17,8 @@ window.addEventListener('resize', () => {
 });
 
 const parentElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
-// let cameraWidth: number = parentElement.offsetWidth;
-// let cameraHeight: number = parentElement.offsetHeight;
-let cameraWidth: number = window.innerWidth;
-let cameraHeight: number = window.innerHeight;
+let cameraWidth: number = parentElement.offsetWidth;
+let cameraHeight: number = parentElement.offsetHeight;
 let cameraAspect: number = cameraWidth / cameraHeight;
 let documentHeight: number = Math.max(
   document.body.scrollHeight,
