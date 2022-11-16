@@ -1,28 +1,43 @@
 import * as THREE from 'three';
 
-const scene = new THREE.Scene();
-// scene.background = new THREE.Color( 0xffffff );
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+/**
+ * handle page resize events
+ */
+window.addEventListener('resize', () => {
+  cameraWidth = window.innerWidth;
+  cameraHeight = window.innerHeight;
+  cameraAspect = cameraWidth / cameraHeight;
+  camera.aspect = cameraAspect;
+  camera.updateProjectionMatrix();
+  renderer.setSize(cameraWidth, cameraHeight);
+  renderer.render(scene, camera);
+});
 
-const renderer = new THREE.WebGLRenderer({alpha: true});
+let cameraWidth: number = window.innerWidth;
+let cameraHeight: number = window.innerHeight;
+let cameraAspect: number = cameraWidth / cameraHeight;
+
+const scene: THREE.Scene = new THREE.Scene();
+const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, cameraAspect, 0.1, 1000);
+camera.position.z = 5;
+
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setClearColor(0xffffff, 0);  // alpha being the opacity (transparent desired here)
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(cameraWidth, cameraHeight);
 document.body.appendChild(renderer.domElement);
 
 // const ambientLight = new THREE.AmbientLight( 0x404040 );  // soft white light
-const ambientLight = new THREE.AmbientLight(0x222222);  // more shadows
+const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x222222);  // more shadows
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff);
+const directionalLight: THREE.DirectionalLight = new THREE.DirectionalLight(0xffffff);
 directionalLight.position.set(0, 0, 6);
 scene.add(directionalLight);
 
-const geometry = new THREE.CapsuleGeometry(1, 2, 10, 50);
-const material = new THREE.MeshLambertMaterial({color: 0x00ff00});
-const capsule = new THREE.Mesh(geometry, material);
+const geometry: THREE.CapsuleGeometry = new THREE.CapsuleGeometry(1, 2, 10, 50);
+const material: THREE.MeshLambertMaterial = new THREE.MeshLambertMaterial({color: 0x00ff00});
+const capsule: THREE.Mesh = new THREE.Mesh(geometry, material);
 scene.add(capsule);
-
-camera.position.z = 5;
 
 function animate() {
   requestAnimationFrame(animate);
