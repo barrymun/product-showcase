@@ -37,10 +37,25 @@ const directionalLight: THREE.DirectionalLight = new THREE.DirectionalLight(0xff
 directionalLight.position.set(0, 0, 6);
 scene.add(directionalLight);
 
-// const geometry: THREE.CapsuleGeometry = new THREE.CapsuleGeometry(1, 2, 10, 50);
+const textureLoader: THREE.TextureLoader = new THREE.TextureLoader();
+
+const images: Array<string> = [
+  'public/system-shock-2-windows-side.jpeg',
+  'public/system-shock-2-windows-side.jpeg',
+  'public/system-shock-2-windows-top.jpeg',
+  'public/system-shock-2-windows-bottom.jpeg',
+  'public/system-shock-2-windows-front.jpeg',
+  'public/system-shock-2-windows-back.jpeg',
+];
+
+const materials: Array<THREE.MeshLambertMaterial> = images.map((image: string) => {
+  return new THREE.MeshLambertMaterial({
+    map: textureLoader.load(image),
+  });
+})
+
 const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3.5, 5, 0.5);
-const material: THREE.MeshLambertMaterial = new THREE.MeshLambertMaterial({color: 0x00ff00});
-const shape: THREE.Mesh = new THREE.Mesh(geometry, material);
+const shape: THREE.Mesh = new THREE.Mesh(geometry, materials);
 scene.add(shape);
 
 function animate() {
@@ -48,7 +63,7 @@ function animate() {
 
   shape.rotation.x += 0.01;
   shape.rotation.y += 0.01;
-  shape.rotation.z += 0.01;
+  // shape.rotation.z += 0.01;
 
   renderer.render(scene, camera);
 }
