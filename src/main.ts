@@ -58,16 +58,14 @@ directionalLight.position.set(0, 0, 6);
 scene.add(directionalLight);
 
 const textureLoader: THREE.TextureLoader = new THREE.TextureLoader();
-
 const textureImages: Array<string> = [
-  'public/system-shock-2-windows-side.jpeg',
-  'public/system-shock-2-windows-side.jpeg',
-  'public/system-shock-2-windows-top.jpeg',
-  'public/system-shock-2-windows-bottom.jpeg',
-  'public/system-shock-2-windows-front.jpeg',
-  'public/system-shock-2-windows-back.jpeg',
+  '/system-shock-2-windows-side.jpeg',
+  '/system-shock-2-windows-side.jpeg',
+  '/system-shock-2-windows-top.jpeg',
+  '/system-shock-2-windows-bottom.jpeg',
+  '/system-shock-2-windows-front.jpeg',
+  '/system-shock-2-windows-back.jpeg',
 ];
-
 const materials: Array<THREE.MeshLambertMaterial> = textureImages.map((image: string) => {
   return new THREE.MeshLambertMaterial({
     map: textureLoader.load(image),
@@ -83,10 +81,10 @@ scene.add(shape);
 function animate() {
   requestAnimationFrame(animate);
 
-  // const currentTimeLine: number = (window.scrollY / documentHeight) * 12.5;  // full
-  // const currentTimeLine: number = (window.scrollY / documentHeight) * 6.25;  // half
-  const currentTimeLine: number = window.scrollY / documentHeight;
-  shape.rotation.set(0, currentTimeLine * Math.PI * 2, 0);
+  const position: number = window.scrollY / documentHeight;
+  const x: number = position * Math.PI * -0.15;
+  const y: number = position * Math.PI * 2;
+  shape.rotation.set(x, y, 0);
 
   renderer.render(scene, camera);
 }
