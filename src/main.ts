@@ -4,8 +4,8 @@ import * as THREE from 'three';
  * handle page resize events
  */
 window.addEventListener('resize', () => {
-  cameraWidth = window.innerWidth;
-  cameraHeight = window.innerHeight;
+  cameraWidth = parentElement.offsetWidth;
+  cameraHeight = parentElement.offsetHeight;
   cameraAspect = cameraWidth / cameraHeight;
   camera.aspect = cameraAspect;
   camera.updateProjectionMatrix();
@@ -13,8 +13,9 @@ window.addEventListener('resize', () => {
   renderer.render(scene, camera);
 });
 
-let cameraWidth: number = window.innerWidth;
-let cameraHeight: number = window.innerHeight;
+const parentElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
+let cameraWidth: number = parentElement.offsetWidth;
+let cameraHeight: number = parentElement.offsetHeight;
 let cameraAspect: number = cameraWidth / cameraHeight;
 
 const scene: THREE.Scene = new THREE.Scene();
@@ -24,7 +25,9 @@ camera.position.z = 5;
 const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setClearColor(0xffffff, 0);  // alpha being the opacity (transparent desired here)
 renderer.setSize(cameraWidth, cameraHeight);
-document.body.appendChild(renderer.domElement);
+
+
+parentElement.appendChild(renderer.domElement);
 
 // const ambientLight = new THREE.AmbientLight( 0x404040 );  // soft white light
 const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x222222);  // more shadows
@@ -34,17 +37,18 @@ const directionalLight: THREE.DirectionalLight = new THREE.DirectionalLight(0xff
 directionalLight.position.set(0, 0, 6);
 scene.add(directionalLight);
 
-const geometry: THREE.CapsuleGeometry = new THREE.CapsuleGeometry(1, 2, 10, 50);
+// const geometry: THREE.CapsuleGeometry = new THREE.CapsuleGeometry(1, 2, 10, 50);
+const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3.5, 5, 0.5);
 const material: THREE.MeshLambertMaterial = new THREE.MeshLambertMaterial({color: 0x00ff00});
-const capsule: THREE.Mesh = new THREE.Mesh(geometry, material);
-scene.add(capsule);
+const shape: THREE.Mesh = new THREE.Mesh(geometry, material);
+scene.add(shape);
 
 function animate() {
   requestAnimationFrame(animate);
 
-  capsule.rotation.x += 0.01;
-  capsule.rotation.y += 0.01;
-  capsule.rotation.z += 0.01;
+  shape.rotation.x += 0.01;
+  shape.rotation.y += 0.01;
+  shape.rotation.z += 0.01;
 
   renderer.render(scene, camera);
 }

@@ -21,3 +21,15 @@ body {
   margin: 0;
   /*background-color: #242424;*/
 }
+
+.container {
+  display: flex;
+  color: #242424;
+}
+
+#product-info {}
+
+#product-display {
+  min-width: 50rem;
+  min-height: 50rem;
+}
