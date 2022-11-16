@@ -1,18 +1,23 @@
 import * as THREE from 'three';
 
 const scene = new THREE.Scene();
-// scene.background = new THREE.Color( 0xff0000 );
+// scene.background = new THREE.Color( 0xffffff );
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setClearColor( 0xffffff, 0 );  // alpha being the opacity (transparent desired here)
+const renderer = new THREE.WebGLRenderer({alpha: true});
+renderer.setClearColor(0xffffff, 0);  // alpha being the opacity (transparent desired here)
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const light = new THREE.AmbientLight( 0x404040 ); // soft white light
-scene.add( light );
+// const ambientLight = new THREE.AmbientLight( 0x404040 );  // soft white light
+const ambientLight = new THREE.AmbientLight(0x222222);  // more shadows
+scene.add(ambientLight);
 
-const geometry = new THREE.CapsuleGeometry( 1, 2, 10, 50 );
+const directionalLight = new THREE.DirectionalLight(0xffffff);
+directionalLight.position.set(0, 0, 6);
+scene.add(directionalLight);
+
+const geometry = new THREE.CapsuleGeometry(1, 2, 10, 50);
 const material = new THREE.MeshLambertMaterial({color: 0x00ff00});
 const capsule = new THREE.Mesh(geometry, material);
 scene.add(capsule);
