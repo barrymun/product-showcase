@@ -54,7 +54,7 @@ const materials: Array<THREE.MeshLambertMaterial> = images.map((image: string) =
   });
 })
 
-const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3.5, 5, 0.5);
+const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3, 4, 1);
 const shape: THREE.Mesh = new THREE.Mesh(geometry, materials);
 scene.add(shape);
 
