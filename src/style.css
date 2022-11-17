@@ -33,19 +33,34 @@ body {
 #product {
   position: sticky;
   top: calc(50% - 20rem);
-  width: 100%;
   height: 40rem;
+  width: 100%;
 }
 
-/*TODO: add media query to handle different product sizes for mobile*/
+/* TODO: add media query to handle different product sizes for mobile */
 
 .container {
   display: flex;
-  color: #242424;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4rem;
 }
 
-#product-info {
-  position: relative;
-  z-index: 2;
-  min-height: 200rem;
+@media screen and (max-width: 900px) {
+  .container {
+    gap: 2rem;
+  }
+}
+
+.product-card {
+  min-height: 2rem;
+  min-width: 14rem;
+  box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+  /*box-shadow: 8px 16px 16px hsl(0deg 0% 0% / 0.25);*/
+  border-radius: 0.5rem;
+  color: #242424;
+  height: 20rem;
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.5rem;
 }
