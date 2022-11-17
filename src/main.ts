@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {GLTF, GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 
 /**
  * handle page resize events w.r.t. the renderer
@@ -58,33 +59,44 @@ const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, cameraAs
 camera.position.z = 5.5;
 
 // === lighting ===
-// 0x404040 for soft white light
-const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x222222);  // more shadows
+// const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x222222, 1);  // more shadows
+const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x404040, 5);  // soft white light
 scene.add(ambientLight);
 
-const directionalLight: THREE.DirectionalLight = new THREE.DirectionalLight(0xffffff);
+const directionalLight: THREE.DirectionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(0, 0, 6);
 scene.add(directionalLight);
 
 // === textures ===
-const textureLoader: THREE.TextureLoader = new THREE.TextureLoader();
-const textureImages: Array<string> = [
-  '/system-shock-2-windows-side.jpeg',
-  '/system-shock-2-windows-side.jpeg',
-  '/system-shock-2-windows-top.jpeg',
-  '/system-shock-2-windows-bottom.jpeg',
-  '/system-shock-2-windows-front.jpeg',
-  '/system-shock-2-windows-back.jpeg',
-];
-const materials: Array<THREE.MeshLambertMaterial> = textureImages.map((image: string) => {
-  return new THREE.MeshLambertMaterial({
-    map: textureLoader.load(image),
-  });
-})
+// const textureLoader: THREE.TextureLoader = new THREE.TextureLoader();
+// const textureImages: Array<string> = [
+//   '/system-shock-2-windows-side.jpeg',
+//   '/system-shock-2-windows-side.jpeg',
+//   '/system-shock-2-windows-top.jpeg',
+//   '/system-shock-2-windows-bottom.jpeg',
+//   '/system-shock-2-windows-front.jpeg',
+//   '/system-shock-2-windows-back.jpeg',
+// ];
+// const materials: Array<THREE.MeshLambertMaterial> = textureImages.map((image: string) => {
+//   return new THREE.MeshLambertMaterial({
+//     map: textureLoader.load(image),
+//   });
+// });
 
-const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3, 4, 1);
-const shape: THREE.Mesh = new THREE.Mesh(geometry, materials);
-scene.add(shape);
+// === geometry ===
+// const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3, 4, 1);
+// const shape: THREE.Mesh = new THREE.Mesh(geometry, materials);
+// scene.add(shape);
+
+// === geometry ===
+let model: THREE.Group | null;
+const gltfLoader: GLTFLoader = new GLTFLoader();
+gltfLoader.load('iphone-x.glb', (gltf: GLTF) => {
+  gltf.scene.scale.multiplyScalar(3);
+  gltf.scene.position.y = -4;
+  model = gltf.scene;
+  scene.add(gltf.scene);
+})
 
 // renderer
 const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({alpha: true});
@@ -96,7 +108,8 @@ productElement.appendChild(renderer.domElement);
 
 const offsetX: number = 0;
 const offsetY: number = 0.45;
-const offsetZ: number = 0.02;
+// const offsetZ: number = 0.02;
+const offsetZ: number = 0;
 
 function animate() {
   requestAnimationFrame(animate);
@@ -104,7 +117,9 @@ function animate() {
   const position: number = window.scrollY / productDisplayElement.offsetHeight;
   const x: number = (position * Math.PI * -0.15) + offsetX;
   const y: number = (position * Math.PI * 2) + offsetY;
-  shape.rotation.set(x, y, offsetZ);
+
+  // shape.rotation.set(x, y, offsetZ);
+  if (model != null) model.rotation.set(x, y, offsetZ);
 
   renderer.render(scene, camera);
 }
