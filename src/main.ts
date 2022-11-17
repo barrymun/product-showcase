@@ -20,13 +20,18 @@ const productFadeEffect = (): void => {
   // start the fade effect at a percentage of the product scroll area
   const startPercentage: number = 0.8;
   const sectionWhereFadeBegins: number = productDisplayElement.offsetHeight * startPercentage;
-  if (window.scrollY >= sectionWhereFadeBegins && window.scrollY <= productDisplayElement.offsetHeight) {
-    let denominator: number = productDisplayElement.offsetHeight - sectionWhereFadeBegins;
+  const sectionWhereFadeEnds: number = productDisplayElement.offsetHeight;
+  if (window.scrollY >= sectionWhereFadeBegins && window.scrollY <= sectionWhereFadeEnds) {
+    let denominator: number = sectionWhereFadeEnds - sectionWhereFadeBegins;
     denominator = denominator > 0 ? denominator : 1;
-    let numerator: number = productDisplayElement.offsetHeight - window.scrollY;
+    let numerator: number = sectionWhereFadeEnds - window.scrollY;
     numerator = numerator > 0 ? numerator : 1;
     let opacity = numerator / denominator;
     productElement.style.opacity = opacity.toString();
+  } else if (window.scrollY < sectionWhereFadeBegins) {
+    productElement.style.opacity = '1';
+  } else if (window.scrollY > sectionWhereFadeEnds) {
+    productElement.style.opacity = '0';
   }
 };
 
