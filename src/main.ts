@@ -29,10 +29,13 @@ const productFadeEffect = (): void => {
     let numerator: number = sectionWhereFadeEnds - window.scrollY;
     numerator = numerator > 0 ? numerator : 1;
     let opacity = numerator / denominator;
+    productTitleElement.style.opacity = opacity.toString();
     productElement.style.opacity = opacity.toString();
   } else if (window.scrollY < sectionWhereFadeBegins) {
+    productTitleElement.style.opacity = '1';
     productElement.style.opacity = '1';
   } else if (window.scrollY > sectionWhereFadeEnds) {
+    productTitleElement.style.opacity = '0';
     productElement.style.opacity = '0';
   }
 };
@@ -42,6 +45,7 @@ window.addEventListener('resize', handleResize);
 window.addEventListener('scroll', productFadeEffect);
 
 const productDisplayElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
+const productTitleElement: HTMLDivElement = (document.getElementById('product-title') as HTMLDivElement)!;
 const productElement: HTMLDivElement = (document.getElementById('product') as HTMLDivElement)!;
 let cameraWidth: number = productElement.offsetWidth;
 let cameraHeight: number = productElement.offsetHeight;

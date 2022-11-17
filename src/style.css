@@ -59,6 +59,17 @@ body {
   /*overflow-y: scroll;*/ /* do not set this when the child element is sticky */
 }
 
+#product-title {
+  font-size: 2.25rem;
+  color: #242424;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  position: sticky;
+  top: 5rem;
+}
+
 #product {
   position: sticky;
   top: calc(50% - 20rem);
