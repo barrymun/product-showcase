@@ -20,8 +20,25 @@ body {
   height: 100%;
   margin: 0;
   /*background-color: #242424;*/
-  min-height: 200vh;
+  /*min-height: 200vh;*/
 }
+
+.product-display {
+  position: relative;
+  z-index: 2;
+  height: 100rem;
+  /*overflow-y: scroll;*/ /* do not set this when the child element is sticky */
+}
+
+#product {
+  position: sticky;
+  top: 0;
+  height: 40rem;
+  width: 100%;
+  /*height: 100%;*/
+}
+
+/*TODO: add media query to handle different product sizes for mobile*/
 
 .container {
   display: flex;
@@ -31,14 +48,5 @@ body {
 #product-info {
   position: relative;
   z-index: 2;
-}
-
-#product-display {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  /*width: 100%;*/
-  width: 50%;
-  height: 100%;
+  min-height: 200rem;
 }

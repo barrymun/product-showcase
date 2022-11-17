@@ -16,7 +16,7 @@ window.addEventListener('resize', () => {
   renderer.setSize(cameraWidth, cameraHeight);
 });
 
-const parentElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
+const parentElement: HTMLDivElement = (document.getElementById('product') as HTMLDivElement)!;
 let cameraWidth: number = parentElement.offsetWidth;
 let cameraHeight: number = parentElement.offsetHeight;
 let cameraAspect: number = cameraWidth / cameraHeight;
@@ -71,7 +71,8 @@ scene.add(shape);
 function animate() {
   requestAnimationFrame(animate);
 
-  const position: number = window.scrollY / documentHeight;
+  // const position: number = window.scrollY / documentHeight;
+  const position: number = window.scrollY / parentElement.offsetHeight;
   const x: number = position * Math.PI * -0.15;
   const y: number = position * Math.PI * 2;
   shape.rotation.set(x, y, 0);
