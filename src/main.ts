@@ -88,7 +88,7 @@ const shape: THREE.Mesh = new THREE.Mesh(geometry, materials);
 scene.add(shape);
 
 const offsetX: number = 0;
-const offsetY: number = 0.04;
+const offsetY: number = 0.45;
 const offsetZ: number = 0.02;
 
 function animate() {
