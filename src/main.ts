@@ -91,7 +91,7 @@ scene.add(directionalLight);
 // === geometry ===
 let model: THREE.Group | null;
 const gltfLoader: GLTFLoader = new GLTFLoader();
-gltfLoader.load('iphone-x.glb', (gltf: GLTF) => {
+gltfLoader.load('/iphone-x.glb', (gltf: GLTF) => {
   gltf.scene.scale.multiplyScalar(3);
   gltf.scene.position.y = -4;
   model = gltf.scene;
