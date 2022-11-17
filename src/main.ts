@@ -16,6 +16,24 @@ window.addEventListener('resize', () => {
   renderer.setSize(cameraWidth, cameraHeight);
 });
 
+const productFadeEffect = (): void => {
+  // start the fade effect at a percentage of the product scroll area
+  const startPercentage: number = 0.8;
+  const sectionWhereFadeBegins: number = productDisplayElement.offsetHeight * startPercentage;
+  if (window.scrollY >= sectionWhereFadeBegins && window.scrollY <= productDisplayElement.offsetHeight) {
+    let denominator: number = productDisplayElement.offsetHeight - sectionWhereFadeBegins;
+    denominator = denominator > 0 ? denominator : 1;
+    let numerator: number = productDisplayElement.offsetHeight - window.scrollY;
+    numerator = numerator > 0 ? numerator : 1;
+    let opacity = numerator / denominator;
+    productElement.style.opacity = opacity.toString();
+  }
+};
+
+window.addEventListener('scroll', () => {
+  productFadeEffect();
+});
+
 const productDisplayElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
 const productElement: HTMLDivElement = (document.getElementById('product') as HTMLDivElement)!;
 let cameraWidth: number = productElement.offsetWidth;
@@ -68,7 +86,7 @@ const offsetZ: number = 0.02;
 
 function animate() {
   requestAnimationFrame(animate);
-  
+
   const position: number = window.scrollY / productDisplayElement.offsetHeight;
   const x: number = (position * Math.PI * -0.15) + offsetX;
   const y: number = (position * Math.PI * 2) + offsetY;
