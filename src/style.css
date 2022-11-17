@@ -65,9 +65,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
   position: sticky;
-  top: 5rem;
+  top: 4rem;
+  margin-top: 4rem;
 }
 
 #product {

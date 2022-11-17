@@ -12,6 +12,11 @@ const handleResize = (): void => {
   renderer.setSize(cameraWidth, cameraHeight);
 };
 
+const productOpacityFactory = (opacity: string): void => {
+  productTitleElement.style.opacity = opacity;
+  productElement.style.opacity = opacity;
+};
+
 /**
  * fade effect as the product starts to approach of the bottom of its scroll limit
  */
@@ -28,15 +33,12 @@ const productFadeEffect = (): void => {
     denominator = denominator > 0 ? denominator : 1;
     let numerator: number = sectionWhereFadeEnds - window.scrollY;
     numerator = numerator > 0 ? numerator : 1;
-    let opacity = numerator / denominator;
-    productTitleElement.style.opacity = opacity.toString();
-    productElement.style.opacity = opacity.toString();
+    let opacity: number = numerator / denominator;
+    productOpacityFactory(opacity.toString());
   } else if (window.scrollY < sectionWhereFadeBegins) {
-    productTitleElement.style.opacity = '1';
-    productElement.style.opacity = '1';
+    productOpacityFactory('1');
   } else if (window.scrollY > sectionWhereFadeEnds) {
-    productTitleElement.style.opacity = '0';
-    productElement.style.opacity = '0';
+    productOpacityFactory('0');
   }
 };
 
