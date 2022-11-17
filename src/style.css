@@ -94,7 +94,14 @@ body {
   color: #242424;
   height: 20rem;
   margin-bottom: 1.2rem;
-  /*padding: 1rem 1.5rem;*/
+  transform: scale(0.96);
+  transition: transform;
+  transition-timing-function: ease;
+  transition-duration: 300ms;
+}
+
+.product-card:hover {
+  transform: scale(1);
 }
 
 .card-header {
@@ -110,4 +117,8 @@ body {
   aspect-ratio: 5/3;
   object-fit: cover;  /* so that images are in proportion to the aspect ratio */
   /*opacity: 0.2;*/
+}
+
+.card-body {
+  padding: 1rem 1.5rem;
 }
