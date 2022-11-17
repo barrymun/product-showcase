@@ -16,17 +16,11 @@ window.addEventListener('resize', () => {
   renderer.setSize(cameraWidth, cameraHeight);
 });
 
+const productDisplayElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
 const productElement: HTMLDivElement = (document.getElementById('product') as HTMLDivElement)!;
 let cameraWidth: number = productElement.offsetWidth;
 let cameraHeight: number = productElement.offsetHeight;
 let cameraAspect: number = cameraWidth / cameraHeight;
-let documentHeight: number = Math.max(
-  document.body.scrollHeight,
-  document.body.offsetHeight,
-  document.documentElement.clientHeight,
-  document.documentElement.scrollHeight,
-  document.documentElement.offsetHeight
-);
 
 const scene: THREE.Scene = new THREE.Scene();
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, cameraAspect, 0.1, 1000);
@@ -64,18 +58,21 @@ const materials: Array<THREE.MeshLambertMaterial> = textureImages.map((image: st
 
 const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3, 4, 1);
 const shape: THREE.Mesh = new THREE.Mesh(geometry, materials);
-// shape.rotateX(0.4);
-// shape.rotateY(0.4);
+// shape.rotateX(10.4);
+// shape.rotateY(10.4);
 scene.add(shape);
+
+const offsetX: number = 0;
+const offsetY: number = 0.04;
+const offsetZ: number = 0.02;
 
 function animate() {
   requestAnimationFrame(animate);
-
-  // const position: number = window.scrollY / documentHeight;
-  const position: number = window.scrollY / 2000;
-  const x: number = position * Math.PI * -0.15;
-  const y: number = position * Math.PI * 2;
-  shape.rotation.set(x, y, 0);
+  
+  const position: number = window.scrollY / productDisplayElement.offsetHeight;
+  const x: number = (position * Math.PI * -0.15) + offsetX;
+  const y: number = (position * Math.PI * 2) + offsetY;
+  shape.rotation.set(x, y, offsetZ);
 
   renderer.render(scene, camera);
 }
