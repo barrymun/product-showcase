@@ -4,21 +4,21 @@ import * as THREE from 'three';
  * handle page resize events
  */
 window.addEventListener('resize', () => {
-  cameraWidth = parentElement.offsetWidth;
-  cameraHeight = parentElement.offsetHeight;
-  // cameraWidth = parentElement.getBoundingClientRect().width;
-  // cameraHeight = parentElement.getBoundingClientRect().height;
-  // cameraWidth = parentElement.clientWidth;
-  // cameraHeight = parentElement.clientHeight;
+  cameraWidth = productElement.offsetWidth;
+  cameraHeight = productElement.offsetHeight;
+  // cameraWidth = productElement.getBoundingClientRect().width;
+  // cameraHeight = productElement.getBoundingClientRect().height;
+  // cameraWidth = productElement.clientWidth;
+  // cameraHeight = productElement.clientHeight;
   cameraAspect = cameraWidth / cameraHeight;
   camera.aspect = cameraAspect;
   camera.updateProjectionMatrix();
   renderer.setSize(cameraWidth, cameraHeight);
 });
 
-const parentElement: HTMLDivElement = (document.getElementById('product') as HTMLDivElement)!;
-let cameraWidth: number = parentElement.offsetWidth;
-let cameraHeight: number = parentElement.offsetHeight;
+const productElement: HTMLDivElement = (document.getElementById('product') as HTMLDivElement)!;
+let cameraWidth: number = productElement.offsetWidth;
+let cameraHeight: number = productElement.offsetHeight;
 let cameraAspect: number = cameraWidth / cameraHeight;
 let documentHeight: number = Math.max(
   document.body.scrollHeight,
@@ -37,7 +37,7 @@ renderer.setClearColor(0xffffff, 0);  // alpha being the opacity (transparent de
 renderer.setSize(cameraWidth, cameraHeight);
 
 // bind the renderer to the DOM
-parentElement.appendChild(renderer.domElement);
+productElement.appendChild(renderer.domElement);
 
 // const ambientLight = new THREE.AmbientLight( 0x404040 );  // soft white light
 const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x222222);  // more shadows
@@ -72,7 +72,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   // const position: number = window.scrollY / documentHeight;
-  const position: number = window.scrollY / parentElement.offsetHeight;
+  const position: number = window.scrollY / 2000;
   const x: number = position * Math.PI * -0.15;
   const y: number = position * Math.PI * 2;
   shape.rotation.set(x, y, 0);
