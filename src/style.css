@@ -13,6 +13,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --max-width: 80rem;
+  --max-width-lg: 60rem;
+  --max-width-md: 50rem;
+  --max-width-sm: 18rem;
 }
 
 body {
@@ -21,6 +26,30 @@ body {
   margin: 0;
   /*background-color: #242424;*/
   /*min-height: 200vh;*/
+}
+
+.container {
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 1400px) {
+  .container {
+    max-width: var(--max-width-lg);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .container {
+    max-width: var(--max-width-md);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    max-width: var(--max-width-sm);
+  }
 }
 
 #product-display {
@@ -39,17 +68,19 @@ body {
 
 /* TODO: add media query to handle different product sizes for mobile */
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+.products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*flex-wrap: wrap;*/
   gap: 4rem;
 }
 
 @media screen and (max-width: 900px) {
-  .container {
+  .products {
     gap: 2rem;
+    grid-template-columns: 1fr;
   }
 }
 
