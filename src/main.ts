@@ -1,26 +1,28 @@
 import * as THREE from 'three';
 
 /**
- * handle page resize events
+ * handle page resize events w.r.t. the renderer
  */
-window.addEventListener('resize', () => {
+const handleResize = (): void => {
   cameraWidth = productElement.offsetWidth;
   cameraHeight = productElement.offsetHeight;
-  // cameraWidth = productElement.getBoundingClientRect().width;
-  // cameraHeight = productElement.getBoundingClientRect().height;
-  // cameraWidth = productElement.clientWidth;
-  // cameraHeight = productElement.clientHeight;
   cameraAspect = cameraWidth / cameraHeight;
   camera.aspect = cameraAspect;
   camera.updateProjectionMatrix();
   renderer.setSize(cameraWidth, cameraHeight);
-});
+};
 
+/**
+ * fade effect as the product starts to approach of the bottom of its scroll limit
+ */
 const productFadeEffect = (): void => {
-  // start the fade effect at a percentage of the product scroll area
+  // start the fade effect at a given percentage of the product scroll area
+  // in this case, the user would have to scroll down through the product container startPercentage %
+  // before the fade effect could begin
   const startPercentage: number = 0.8;
   const sectionWhereFadeBegins: number = productDisplayElement.offsetHeight * startPercentage;
   const sectionWhereFadeEnds: number = productDisplayElement.offsetHeight;
+
   if (window.scrollY >= sectionWhereFadeBegins && window.scrollY <= sectionWhereFadeEnds) {
     let denominator: number = sectionWhereFadeEnds - sectionWhereFadeBegins;
     denominator = denominator > 0 ? denominator : 1;
@@ -35,19 +37,19 @@ const productFadeEffect = (): void => {
   }
 };
 
-window.addEventListener('scroll', () => {
-  productFadeEffect();
-});
+// event listeners
+window.addEventListener('resize', handleResize);
+window.addEventListener('scroll', productFadeEffect);
 
 const productDisplayElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
 const productElement: HTMLDivElement = (document.getElementById('product') as HTMLDivElement)!;
 let cameraWidth: number = productElement.offsetWidth;
 let cameraHeight: number = productElement.offsetHeight;
-let cameraAspect: number = cameraWidth / cameraHeight;
+let cameraAspect: number = productElement.offsetWidth / productElement.offsetHeight;
 
 const scene: THREE.Scene = new THREE.Scene();
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, cameraAspect, 0.1, 1000);
-camera.position.z = 5;
+camera.position.z = 5.5;
 
 const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setClearColor(0xffffff, 0);  // alpha being the opacity (transparent desired here)
