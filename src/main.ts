@@ -57,14 +57,8 @@ const scene: THREE.Scene = new THREE.Scene();
 const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, cameraAspect, 0.1, 1000);
 camera.position.z = 5.5;
 
-const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({alpha: true});
-renderer.setClearColor(0xffffff, 0);  // alpha being the opacity (transparent desired here)
-renderer.setSize(cameraWidth, cameraHeight);
-
-// bind the renderer to the DOM
-productElement.appendChild(renderer.domElement);
-
-// const ambientLight = new THREE.AmbientLight( 0x404040 );  // soft white light
+// === lighting ===
+// 0x404040 for soft white light
 const ambientLight: THREE.AmbientLight = new THREE.AmbientLight(0x222222);  // more shadows
 scene.add(ambientLight);
 
@@ -72,6 +66,7 @@ const directionalLight: THREE.DirectionalLight = new THREE.DirectionalLight(0xff
 directionalLight.position.set(0, 0, 6);
 scene.add(directionalLight);
 
+// === textures ===
 const textureLoader: THREE.TextureLoader = new THREE.TextureLoader();
 const textureImages: Array<string> = [
   '/system-shock-2-windows-side.jpeg',
@@ -89,9 +84,15 @@ const materials: Array<THREE.MeshLambertMaterial> = textureImages.map((image: st
 
 const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(3, 4, 1);
 const shape: THREE.Mesh = new THREE.Mesh(geometry, materials);
-// shape.rotateX(10.4);
-// shape.rotateY(10.4);
 scene.add(shape);
+
+// renderer
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({alpha: true});
+renderer.setClearColor(0xffffff, 0);  // alpha being the opacity (transparent desired here)
+renderer.setSize(cameraWidth, cameraHeight);
+
+// bind the renderer to the DOM
+productElement.appendChild(renderer.domElement);
 
 const offsetX: number = 0;
 const offsetY: number = 0.45;
