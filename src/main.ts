@@ -19,7 +19,7 @@ const productFadeEffect = (): void => {
   // start the fade effect at a given percentage of the product scroll area
   // in this case, the user would have to scroll down through the product container startPercentage %
   // before the fade effect could begin
-  const startPercentage: number = 0.8;
+  const startPercentage: number = 0.75;
   const sectionWhereFadeBegins: number = productDisplayElement.offsetHeight * startPercentage;
   const sectionWhereFadeEnds: number = productDisplayElement.offsetHeight;
 
