@@ -13,7 +13,7 @@ const handleResize = (): void => {
   renderer.setSize(cameraWidth, cameraHeight);
 };
 
-const productOpacityFactory = (opacity: string): void => {
+const alterProductOpacity = (opacity: string): void => {
   productTitleElement.style.opacity = opacity;
   productElement.style.opacity = opacity;
 };
@@ -35,11 +35,11 @@ const productFadeEffect = (): void => {
     let numerator: number = sectionWhereFadeEnds - window.scrollY;
     numerator = numerator > 0 ? numerator : 1;
     let opacity: number = numerator / denominator;
-    productOpacityFactory(opacity.toString());
+    alterProductOpacity(opacity.toString());
   } else if (window.scrollY < sectionWhereFadeBegins) {
-    productOpacityFactory('1');
+    alterProductOpacity('1');
   } else if (window.scrollY > sectionWhereFadeEnds) {
-    productOpacityFactory('0');
+    alterProductOpacity('0');
   }
 };
 
