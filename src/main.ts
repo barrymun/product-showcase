@@ -13,6 +13,9 @@ const handleResize = (): void => {
   renderer.setSize(cameraWidth, cameraHeight);
 };
 
+/**
+ * alter the opacity of the product title and product itself
+ */
 const alterProductOpacity = (opacity: string): void => {
   productTitleElement.style.opacity = opacity;
   productElement.style.opacity = opacity;
@@ -42,10 +45,6 @@ const productFadeEffect = (): void => {
     alterProductOpacity('0');
   }
 };
-
-// event listeners
-window.addEventListener('resize', handleResize);
-window.addEventListener('scroll', productFadeEffect);
 
 const productDisplayElement: HTMLDivElement = (document.getElementById('product-display') as HTMLDivElement)!;
 const productTitleElement: HTMLDivElement = (document.getElementById('product-title') as HTMLDivElement)!;
@@ -105,4 +104,13 @@ function animate() {
 
 animate();
 
-export {};
+const handleUnload = (): void => {
+  window.removeEventListener('resize', handleResize);
+  window.removeEventListener('scroll', productFadeEffect);
+  window.removeEventListener('unload', handleUnload);
+};
+
+// event listeners
+window.addEventListener('resize', handleResize);
+window.addEventListener('scroll', productFadeEffect);
+window.addEventListener('unload', handleUnload);
