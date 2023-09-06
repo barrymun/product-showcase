@@ -1,7 +1,26 @@
-### Sample product showcase page with a 3d rendered sample product which rotates as the page is scrolled.
+# Sample Product Showcase Page
 
-### Sample description cards with stock images also provided.
+A showcase page featuring a 3D rendered sample product (phone) that rotates as you scroll. Also included are sample description cards equipped with stock images.
 
-### Preview [here](http://barrymun.product-showcase.surge.sh/).
+## Live Demo
 
-#### iPhone X 3d model taken from [free3d](https://free3d.com/3d-model/iphonex-983338.html).
+[View the product showcase here](http://barrymun.product-showcase.surge.sh/)
+
+## Features
+
+- 3D rendered phone model which rotates based on scroll position.
+- Informative description cards.
+- Stock images to complement the description.
+
+## Technology Used
+
+This project was made possible using [Three.js](https://threejs.org/), a popular 3D library for the web.
+
+## Credit
+
+- The iPhone 3D model is sourced from [Free3D](https://free3d.com/3d-model/iphonex-983338.html). Big thanks for providing the asset!
+- Special thanks to [Three.js](https://threejs.org/) for the 3D rendering capabilities.
+
+## License
+
+This project is licensed under the MIT License.
